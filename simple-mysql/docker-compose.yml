@@ -1,12 +1,27 @@
 version: "3"
 services:
 
-   db:
-     image: mysql:5.7
-     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;'
-     volumes:
-       - ./db_data:/var/lib/mysql
-     restart: always
-     environment:
-       MYSQL_ROOT_PASSWORD: python
-       MYSQL_DATABASE: izone
+  db:
+    restart: always
+    image: mysql:5.7
+    container_name: my_db
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - back
+    environment:
+      MYSQL_ROOT_PASSWORD: admin@123
+    ports:
+      - "3306:3306"
+
+networks:
+  back:
+    driver: bridge
+
+volumes:
+  mysql:
+
+
+
+
+
